@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pongpat.exam</groupId>
-	<artifactId>employee.management</artifactId>
+	<artifactId>employee-management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee.management</name>
+	<name>employee-management</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
