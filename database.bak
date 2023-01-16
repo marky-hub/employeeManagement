@@ -67,6 +67,8 @@ CREATE TABLE public.employee (
     birthday date,
     phone character varying,
     address character varying,
+    start_date timestamp without time zone,
+    end_date timestamp without time zone,
     position_id integer
 );
 
@@ -102,8 +104,6 @@ ALTER SEQUENCE public.employee_id_seq OWNED BY public.employee.id;
 CREATE TABLE public."position" (
     id integer NOT NULL,
     name character varying,
-    start_date timestamp without time zone,
-    exipiry_date timestamp without time zone,
     department_id integer
 );
 
@@ -165,7 +165,7 @@ COPY public.department (id, name, code) FROM stdin;
 -- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.employee (id, first_name, last_name, card_id, birthday, phone, address, position_id) FROM stdin;
+COPY public.employee (id, first_name, last_name, card_id, birthday, phone, address, start_date, end_date, position_id) FROM stdin;
 \.
 
 
@@ -173,7 +173,7 @@ COPY public.employee (id, first_name, last_name, card_id, birthday, phone, addre
 -- Data for Name: position; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."position" (id, name, start_date, exipiry_date, department_id) FROM stdin;
+COPY public."position" (id, name, department_id) FROM stdin;
 \.
 
 

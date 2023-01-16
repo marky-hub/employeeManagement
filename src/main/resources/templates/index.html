@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+
+
+<body>
+    <div class="container my-2">
+        <div class="card">
+            <div class="card-body">
+                <div th:switch="${empList}" class="container my-5">
+                    <p class="my-5">
+                        <a href="/employee/create" class="btn btn-primary"><i
+                        accesskey=""class="fas fa-user-plus ml-2"> Create Employee</i></a>
+                    </p>
+                    <form id="searchForm" th:action="@{/employee/search}" th:object="${employeeSearchFormData}" method="post">
+                        
+                        <div class="form-inline">
+                          <input type="text" th:field="*{name}" class="form-control col" placeholder="Name" />
+                          <input class="btn btn-secondary" type="submit" value="Search">
+                        </div>
+                    </form>
+                    <div class="col-12">
+                        <div th:case="*">
+                            <table class="table table-striped table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <!--<th>ID</th>-->
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Position</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="employee : ${empList}">
+                                        <!--<td th:text="${employee.id}"></td>-->
+                                        <td th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
+                                        <td th:text="${employee.phone}"></td>
+                                        <td th:text="${#dates.format(employee.startDate, 'dd-MM-yyyy')}"></td>
+                                        <td th:text="${#dates.format(employee.endDate, 'dd-MM-yyyy')}"></td>
+                                        <td th:text="${employee.position != null ?employee.position.getName() : '-'}"></td>
+                                        <td class="form-inline">
+                                            <a th:href="@{/employee/edit(id=${employee.id})}" class="btn btn-warning">แก้ไข <i class="fas fa-user-edit ml-2"></i></a>
+                                            <form th:action="@{/employee/retire(id=${employee.id})}" method="post"><button type="submit" class="btn btn-danger">ลาออก <i class="fas fa-user-times ml-2"></i></button></form> 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
